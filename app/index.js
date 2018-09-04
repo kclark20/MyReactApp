@@ -3,7 +3,12 @@ import ReactDOM from ('react-dom');
 import App from ('./components/App');
 
 class Board extends React.Component {
-    renderSquare(i) {
+    constructor(props) {
+        super(props);
+        this.state ={
+            squares: Array(9).fill(null)
+        };
+      renderSquare(i)
         return <Square value = {i} />;
     }
     render(){
@@ -29,12 +34,7 @@ class Board extends React.Component {
             </div>
           );
         }
-      }
-      
-        
-    
-
-
+    }
 class Square extends React.Component {
     constructor(props){
         super(props);
@@ -50,11 +50,21 @@ class Square extends React.Component {
         </button>
       );  }
   }
-class Game extends React.Component{
 
+class Game extends React.Components {
+    render(){
+        return(
+            <div className= "game">
+            <div className="game-board">
+             <Board /> 
+            </div>
+            <div classname="game-info">
+            </div>
+            </div>
+        )
+    }
 }
-
 
 ReactDOM.render(
     <App />,
-      document.getElementById('app'));
+    document.getElementById('app'));
