@@ -2,14 +2,33 @@ import React from ('react');
 import ReactDOM from ('react-dom');
 import App from ('./components/App');
 
+function Square(props) {
+    return(
+        <button className="square" on Click={props.onClick}>
+        {props.value}
+        </button>
+    );
+}
+
 class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
             squares: Array(9).fill(null)
         };
-      renderSquare(i)
-        return <Square value = {i} />;
+    }
+    handleClick(i){
+        const squares = this .state.squares.slice();
+        squares[i]='X';
+        this.setState({squares: squares});
+    }
+      renderSquare(i) {
+        return ( 
+        <Square 
+        value={this.state.squares [i]} 
+        onClick={() => this.handleClick(i)}
+        />
+      );
     }
     render(){
         const status ='Next player:X';
@@ -36,21 +55,15 @@ class Board extends React.Component {
         }
     }
 class Square extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            value:null,
-        };
-    }
-    render() {
+    render(){
       return (
         <button className="square" 
-        onClick={function() { alert('click'); }}>
+        onClick={() => this.props.onClick()}>
           {this.props.value}
         </button>
-      );  }
-  }
-
+      );  
+    }
+}
 class Game extends React.Components {
     render(){
         return(
@@ -59,12 +72,13 @@ class Game extends React.Components {
              <Board /> 
             </div>
             <div classname="game-info">
+             <div>{}</div>
+             <ol>{}</ol>
             </div>
             </div>
-        )
+        );
     }
 }
-
 ReactDOM.render(
     <App />,
     document.getElementById('app'));
